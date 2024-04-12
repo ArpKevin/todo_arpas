@@ -26,7 +26,9 @@ namespace todo_arpas
                 listboxTesztadatok.Items.Insert(i, $"adat{i+1}");
             }
             listboxTesztadatok.SelectedIndex = 0;
-            btnTorles.IsEnabled = true;
+            btnDel.IsEnabled = true;
+
+            listboxTesztadatok.SelectionChanged += ListBox_SelectionChanged;
         }
 
         private void btnDelAll_Click(object sender, RoutedEventArgs e)
@@ -52,10 +54,61 @@ namespace todo_arpas
             }
             txtboxBevitel.Clear();
         }
-
-        private void btnTorles_Click(object sender, RoutedEventArgs e)
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listboxTesztadatok.SelectedItem != null) listboxTesztadatok.Items.Remove(listboxTesztadatok.SelectedItem); else btnTorles.IsEnabled = false;
+            btnDel.IsEnabled = listboxTesztadatok.SelectedItem != null;
+            btnEdit.IsEnabled = listboxTesztadatok.SelectedItem != null;
+            btnUp.IsEnabled = listboxTesztadatok.SelectedItem != null;
+            btnDown.IsEnabled = listboxTesztadatok.SelectedItem != null;
+        }
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+            listboxTesztadatok.Items.Remove(listboxTesztadatok.SelectedItem);
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            string kivalasztott = listboxTesztadatok.SelectedItem.ToString();
+            string beviteliMezo = txtboxBevitel.Text;
+            if (beviteliMezo.Trim() == "" || beviteliMezo == kivalasztott) MessageBox.Show("Hiba! Nem változott az adat."); else if (listboxTesztadatok.Items.Contains(beviteliMezo)) MessageBox.Show("A módosítás utáni érték már szerepel a listában."); else listboxTesztadatok.Items[listboxTesztadatok.SelectedIndex] = beviteliMezo;
+        }
+
+        private void btnUp_Click(object sender, RoutedEventArgs e)
+        {
+            if (listboxTesztadatok.SelectedIndex == 0)
+            {
+                MessageBox.Show("Első elemet hova viszed fel?");
+            }
+            else
+            {
+                int currentIndex = listboxTesztadatok.SelectedIndex;
+                int previousIndex = currentIndex - 1;
+
+                object temp = listboxTesztadatok.Items[currentIndex];
+                listboxTesztadatok.Items[currentIndex] = listboxTesztadatok.Items[previousIndex];
+                listboxTesztadatok.Items[previousIndex] = temp;
+
+                listboxTesztadatok.SelectedIndex = previousIndex;
+            }
+        }
+
+        private void btnDown_Click(object sender, RoutedEventArgs e)
+        {
+            if (listboxTesztadatok.SelectedIndex == listboxTesztadatok.Items.Count - 1)
+            {
+                MessageBox.Show("Utolsó elemet hova viszed le?");
+            }
+            else
+            {
+                int currentIndex = listboxTesztadatok.SelectedIndex;
+                int nextIndex = currentIndex + 1;
+
+                object temp = listboxTesztadatok.Items[currentIndex];
+                listboxTesztadatok.Items[currentIndex] = listboxTesztadatok.Items[nextIndex];
+                listboxTesztadatok.Items[nextIndex] = temp;
+
+                listboxTesztadatok.SelectedIndex = nextIndex;
+            }
         }
     }
 }

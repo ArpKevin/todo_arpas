@@ -10,8 +10,11 @@
         <ListBox x:Name="listboxTesztadatok" Width="100" Height="200" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtboxBevitel" HorizontalAlignment="Left" Margin="559,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnDelAll" Content="Tesztadatok törlése" HorizontalAlignment="Left" Margin="603,340,0,0" VerticalAlignment="Top" Padding="20px 10px" Click="btnDelAll_Click"/>
-        <Button x:Name="btnAdd" Content="Hozzáadás" HorizontalAlignment="Left" Margin="575,158,0,0" VerticalAlignment="Top" Padding="15px 10px" Click="btnAdd_Click"/>
-        <Button x:Name="btnTorles" Content="Törlés" HorizontalAlignment="Left" Margin="603,235,0,0" VerticalAlignment="Top" Padding="20px 10px" Click="btnTorles_Click"/>
+        <Button x:Name="btnAdd" Content="Hozzáadás" HorizontalAlignment="Left" Margin="575,156,0,0" VerticalAlignment="Top" Padding="15px 10px" Click="btnAdd_Click" Width="97"/>
+        <Button x:Name="btnDel" Content="Törlés" HorizontalAlignment="Left" Margin="603,288,0,0" VerticalAlignment="Top" Padding="20px 10px" Click="btnDel_Click"/>
+        <Button x:Name="btnEdit" Content="Módosítás" HorizontalAlignment="Left" Margin="575,206,0,0" VerticalAlignment="Top" Padding="20px 10px" Click="btnEdit_Click"/>
+        <Button x:Name="btnUp" Content="↑" HorizontalAlignment="Left" Margin="155,76,0,0" VerticalAlignment="Top" Padding="20px 10px" Click="btnUp_Click"/>
+        <Button x:Name="btnDown" Content="↓" HorizontalAlignment="Left" Margin="218,76,0,0" VerticalAlignment="Top" Padding="20px 10px" Click="btnDown_Click"/>
 
     </Grid>
 </Window>
