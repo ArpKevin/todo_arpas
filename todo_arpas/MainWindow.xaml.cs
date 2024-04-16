@@ -18,6 +18,7 @@ namespace todo_arpas
     public partial class MainWindow : Window
     {
         private int operationCount = 0;
+        public bool closeable = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -44,12 +45,12 @@ namespace todo_arpas
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            e.Cancel = true;
+            e.Cancel = !closeable;
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-            if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt && e.SystemKey == Key.F4)
+            if (Keyboard.Modifiers == ModifierKeys.Alt && e.SystemKey == Key.F4)
             {
                 e.Handled = true;
             }
@@ -142,15 +143,7 @@ namespace todo_arpas
                 items.Add(item.ToString());
             }
 
-            if (ascending)
-            {
-                items.Sort();
-            }
-            else
-            {
-                items.Sort();
-                items.Reverse();
-            }
+            items = (ascending ? items.OrderBy(x => x) : items.OrderByDescending(x => x)).ToList();
 
             listboxTesztadatok.Items.Clear();
 
@@ -195,9 +188,10 @@ namespace todo_arpas
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Number of operations performed: {operationCount}");
+            MessageBox.Show($"Ennyi műveletet hajtott végre a felhasználó: {operationCount}");
 
-            Close();
+            closeable = true;
+            this.Close();
         }
     }
 }
